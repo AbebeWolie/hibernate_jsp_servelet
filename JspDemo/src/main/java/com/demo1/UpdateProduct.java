@@ -1,0 +1,49 @@
+package com.demo1;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class UpdateProduct
+ */
+public class UpdateProduct extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UpdateProduct() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Product pro = new Product();
+		Product proU = new Product();
+		
+		pro.setId(Integer.parseInt(request.getParameter("id")));
+		pro.setName(request.getParameter("name"));
+		pro.setCategory(request.getParameter("category"));
+		pro.setPrice(Integer.parseInt(request.getParameter("price")));
+		DAO dao = new DAO();
+		pro = dao.Update(pro);
+		request.getRequestDispatcher("ProductList").forward(request, response);
+		
+		
+		
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
